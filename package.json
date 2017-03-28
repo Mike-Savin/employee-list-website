@@ -13,15 +13,23 @@
     "helmet": "^1.3.0",
     "loopback": "^3.0.0",
     "loopback-boot": "^2.6.5",
-    "loopback-component-explorer": "^4.0.0",
+    "loopback-component-explorer": "^4.2.0",
     "loopback-connector-mongodb": "^3.0.1",
+    "loopback-fixtures": "0.0.11",
     "serve-favicon": "^2.0.1",
     "strong-error-handler": "^1.0.1"
   },
   "devDependencies": {
+    "browser-sync": "^2.18.8",
     "eslint": "^2.13.1",
     "eslint-config-loopback": "^4.0.0",
-    "nsp": "^2.1.0"
+    "gulp": "^3.9.1",
+    "gulp-install": "^1.1.0",
+    "gulp-loopback-sdk-angular": "^0.2.0",
+    "gulp-nodemon": "^2.2.1",
+    "gulp-rename": "^1.2.2",
+    "nsp": "^2.1.0",
+    "wiredep": "^4.0.0"
   },
   "repository": {
     "type": "",

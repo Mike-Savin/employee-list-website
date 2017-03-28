@@ -1,0 +1,17 @@
+Employee:
+  employee{1..10}:
+    firstName: "{{name.firstName}}"
+    lastName: "{{name.lastName}}"
+    employmentDate: "2017-01-01"
+    jobTitle: >
+      (function() {
+        var jobIndex = Math.floor(Math.random()*4)
+        return [
+          'CEO', 'Business Analyst', 'Developer', 'QA'
+        ][jobIndex];
+      })()
+    rate: >
+      (function() {
+        return Math.round(Math.random()*1000);
+      })()
+
