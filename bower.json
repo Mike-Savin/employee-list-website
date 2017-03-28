@@ -1,0 +1,17 @@
+{
+  "name": "employee-list-website",
+  "description": "employee-list-website",
+  "main": "server/server.js",
+  "authors": [
+    "Michael Savin <my.savin@yandex.com>"
+  ],
+  "license": "UNLICENSED",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
