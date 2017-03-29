@@ -7,24 +7,19 @@
   },
   "properties": {
     "firstName": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "lastName": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "jobTitle": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "rate": {
-      "type": "number",
-      "required": true
+      "type": "number"
     },
     "employmentDate": {
-      "type": "date",
-      "required": true
+      "type": "date"
     }
   },
   "validations": [],

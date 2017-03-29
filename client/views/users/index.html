@@ -1,0 +1,23 @@
+<section>
+	<button class="btn btn-default btn-new-employee" ui-sref="users.new">Add new employee</button>
+	<table class="table table-bordered table-striped" ng-show="employees.length > 0">
+		<thead>
+	    <tr>
+	      <th>Name</th>
+	      <th>Job title</th>
+	      <th>Employment date</th>
+	      <th>Rate</th>
+	      <th>Action</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr ng-repeat="employee in employees">
+	      <td>{{employee.firstName}} {{employee.lastName}}</td>
+	      <td>{{employee.jobTitle}}</td>
+	      <td>{{employee.employmentDate | date: 'dd-MM-yyyy'}}</td>
+	      <td>{{employee.rate}}</td>
+	      <td><a ng-click="delete(employee)">Delete</a></td>
+	    </tr>
+	  </tbody>
+	</table>
+</section>

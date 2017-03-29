@@ -5,7 +5,8 @@ var gulp = require('gulp'),
   loopbackAngular = require('gulp-loopback-sdk-angular'),
   install = require("gulp-install"),
   wiredep = require('wiredep').stream,
-  browserSync = require('browser-sync');
+  browserSync = require('browser-sync')
+  runSequence = require('run-sequence');
 
 gulp.task('lb-ng', function() {
   return gulp.src('./server/server.js')
@@ -30,7 +31,8 @@ gulp.task('index', function() {
 
 // we'd need a slight delay to reload browsers
 // connected to browser-sync after restarting nodemon
-var BROWSER_SYNC_RELOAD_DELAY = 500;
+var BROWSER_SYNC_LOAD_DELAY = 1000,
+  BROWSER_SYNC_RELOAD_DELAY = 500;
 
 gulp.task('nodemon', function(cb) {
   var called = false;
@@ -62,18 +64,20 @@ gulp.task('nodemon', function(cb) {
 gulp.task('browser-sync', ['nodemon'], function() {
 
   // for more browser-sync config options: http://www.browsersync.io/docs/options/
-  browserSync({
+  setTimeout(function() {
+    browserSync({
 
-    // informs browser-sync to proxy our expressjs app which would run at the following location
-    proxy: 'http://localhost:3000',
+      // informs browser-sync to proxy our expressjs app which would run at the following location
+      proxy: 'http://localhost:3000',
 
-    // informs browser-sync to use the following port for the proxied app
-    // notice that the default port is 3000, which would clash with our expressjs
-    port: 4000,
+      // informs browser-sync to use the following port for the proxied app
+      // notice that the default port is 3000, which would clash with our expressjs
+      port: 4000,
 
-    // open the proxied app in chrome
-    // browser: ['google-chrome']
-  });
+      // open the proxied app in chrome
+      // browser: ['google-chrome']
+    });
+  }, BROWSER_SYNC_LOAD_DELAY);
 });
 
 gulp.task('js', function() {
@@ -94,10 +98,12 @@ gulp.task('bs-reload', function() {
   browserSync.reload();
 });
 
-gulp.task('default', ['install', 'index', 'lb-ng', 'browser-sync'], function() {
-  gulp.watch('common/*', ['lb-ng', 'bs-reload']);
-  gulp.watch('client/**/*.js', ['js', 'bs-reload']);
-  gulp.watch('client/**/*.css', ['css']);
-  gulp.watch('client/**/*.html', ['bs-reload']);
-  gulp.watch('bower.json', ['install', 'index', 'bs-reload']);
+gulp.task('default', ['install', 'index', 'lb-ng'], function() {
+  runSequence('browser-sync', function () {
+    gulp.watch('common/*', ['lb-ng', 'bs-reload']);
+    gulp.watch('client/**/*.js', ['js', 'bs-reload']);
+    gulp.watch('client/**/*.css', ['css']);
+    gulp.watch('client/**/*.html', ['bs-reload']);
+    gulp.watch('bower.json', ['install', 'index', 'bs-reload']);
+  })
 });
