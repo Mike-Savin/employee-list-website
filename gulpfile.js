@@ -1,11 +1,12 @@
 // Gulpfile.js
 var gulp = require('gulp'),
+  concat = require('gulp-concat'),
   nodemon = require('gulp-nodemon'),
   rename = require('gulp-rename'),
   loopbackAngular = require('gulp-loopback-sdk-angular'),
   install = require("gulp-install"),
   wiredep = require('wiredep').stream,
-  browserSync = require('browser-sync')
+  browserSync = require('browser-sync'),
   runSequence = require('run-sequence');
 
 gulp.task('lb-ng', function() {
@@ -21,7 +22,7 @@ gulp.task('install', function() {
 });
 
 gulp.task('index', function() {
-  gulp.src('./client/index.html')
+  gulp.src('./client/views/index.html')
     .pipe(wiredep({
       // optional: 'configuration',
       // goes: 'here'
@@ -31,7 +32,7 @@ gulp.task('index', function() {
 
 // we'd need a slight delay to reload browsers
 // connected to browser-sync after restarting nodemon
-var BROWSER_SYNC_LOAD_DELAY = 1000,
+var BROWSER_SYNC_LOAD_DELAY = 1500,
   BROWSER_SYNC_RELOAD_DELAY = 500;
 
 gulp.task('nodemon', function(cb) {
@@ -81,10 +82,9 @@ gulp.task('browser-sync', ['nodemon'], function() {
 });
 
 gulp.task('js', function() {
-  return gulp.src('client/**/*.js')
-    // do stuff to JavaScript files
-    //.pipe(uglify())
-    //.pipe(gulp.dest('...'));
+  return gulp.src(['client/js/**/*.js', '!client/js/lb-services.js'])
+    .pipe(concat('app.js'))
+    .pipe(gulp.dest('./client'));
 });
 
 gulp.task('css', function() {
@@ -98,7 +98,7 @@ gulp.task('bs-reload', function() {
   browserSync.reload();
 });
 
-gulp.task('default', ['install', 'index', 'lb-ng'], function() {
+gulp.task('default', ['install', 'index', 'lb-ng', 'js'], function() {
   runSequence('browser-sync', function () {
     gulp.watch('common/*', ['lb-ng', 'bs-reload']);
     gulp.watch('client/**/*.js', ['js', 'bs-reload']);
