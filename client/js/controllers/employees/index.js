@@ -1,4 +1,4 @@
-var UsersIndexController = function($scope, prompt, Employee) {
+var EmployeesIndexController = function($scope, prompt, Employee) {
   $scope.employees = [];
   $scope.delete = function (employee) {
     prompt({
@@ -22,5 +22,5 @@ var UsersIndexController = function($scope, prompt, Employee) {
   });
 };
 
-UsersIndexController.$inject = ['$scope', 'prompt', 'Employee'];
-angular.module('app').controller('UsersIndexController', UsersIndexController);
+EmployeesIndexController.$inject = ['$scope', 'prompt', 'Employee'];
+angular.module('app').controller('EmployeesIndexController', EmployeesIndexController);

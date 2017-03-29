@@ -1,22 +1,22 @@
 function Routes($stateProvider, $urlRouterProvider) {
   $stateProvider
-    .state('users', {
-      url: '/users',
+    .state('employees', {
+      url: '/employees',
       abstract: true,
       template: '<div ui-view></div>'
     })
-    .state('users.index', {
+    .state('employees.index', {
       url: '/index',
-      templateUrl: 'views/users/index.html',
-      controller: 'UsersIndexController'
+      templateUrl: 'views/employees/index.html',
+      controller: 'EmployeesIndexController'
     })
-    .state('users.new', {
+    .state('employees.new', {
       url: '/new',
-      templateUrl: 'views/users/new.html',
-      controller: 'UsersNewController'
+      templateUrl: 'views/employees/new.html',
+      controller: 'EmployeesNewController'
     });
 
-  $urlRouterProvider.otherwise('/users/index');
+  $urlRouterProvider.otherwise('/employees/index');
 }
 
 Routes.$inject = ['$stateProvider', '$urlRouterProvider'];
